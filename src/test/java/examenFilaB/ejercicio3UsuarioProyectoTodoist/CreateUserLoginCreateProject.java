@@ -53,6 +53,7 @@ public class CreateUserLoginCreateProject {
         section1Page.continueButton.click();
 
         section2Page.personalButton.click();
+        section2Page.noHelp.click();
         Thread.sleep(1500);
         section2Page.continueButton.click();
 
