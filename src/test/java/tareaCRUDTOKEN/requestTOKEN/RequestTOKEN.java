@@ -34,4 +34,14 @@ public class RequestTOKEN {
     public String getToken() {
         return token;
     }
+
+    public void deleteToken(){
+        Response response=given()
+                .header("Token",token)
+                .log()
+                .all().
+                when()
+                .delete(ConfigurationTOKEN.authenticationToken);
+        response.then().log().all();
+    }
 }
