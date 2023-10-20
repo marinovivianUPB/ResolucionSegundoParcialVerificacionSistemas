@@ -5,6 +5,10 @@ import selenium.control.TextBox;
 import org.openqa.selenium.By;
 
 public class SettingsPopUp {
+
+    public Button accountButton = new Button(By.xpath("//a[text()='Account']"));
+
+    public Button deleteButton = new Button(By.xpath("//input[@type='submit' and @name='DeleteAccountBtn']"));
     public TextBox fullNameInput = new TextBox(By.id("FullNameInput"));
     public TextBox oldPassword = new TextBox(By.id("TextPwOld"));
     public TextBox newPassword = new TextBox(By.id("TextPwNew"));

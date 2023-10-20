@@ -26,4 +26,8 @@ public class Session {
         browser.quit();
         session = null;
     }
+
+    public void acceptWarning(){
+        browser.switchTo().alert().accept();
+    }
 }
