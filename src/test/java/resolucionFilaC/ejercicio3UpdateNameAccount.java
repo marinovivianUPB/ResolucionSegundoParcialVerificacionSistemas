@@ -1,24 +1,28 @@
-package selenium.testTodoist;
+package resolucionFilaC;
 
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import selenium.pagesTodoist.LoginPage;
-import selenium.pagesTodoist.MainPage;
-import selenium.pagesTodoist.WorkspacePage;
+import org.openqa.selenium.Keys;
+import selenium.pagesTodoist.*;
 import selenium.session.Session;
 
-public class LoginTodoistTest {
+import java.util.Random;
 
+public class ejercicio3UpdateNameAccount {
     MainPage mainPage = new MainPage();
     LoginPage loginPage = new LoginPage();
 
     WorkspacePage workspacePage = new WorkspacePage();
 
+    ProfileSettingsPopUp profileSettingsPopUp = new ProfileSettingsPopUp();
+    ProfilePopUp profilePopUp = new ProfilePopUp();
+    AddTaskSection addTaskSection = new AddTaskSection();
     String email = "prueba65785@prueba65785.com";
     String password = "abc456gh913";
 
+    static Random rand = new Random();
     @AfterEach
     public void close(){
         Session.getInstance().closeSession();
@@ -36,6 +40,13 @@ public class LoginTodoistTest {
         loginPage.passwordTextBox.setText(password);
         loginPage.loginButton.click();
         Thread.sleep(10000);
-        Assertions.assertTrue(workspacePage.profileButton.isControlDisplayed(), "ERROR no se pudo iniciar sesion");
+        workspacePage.profileButton.click();
+        String newName = "VivianMarino"+rand.nextInt(500)+rand.nextInt(500);
+        profilePopUp.settingsButton.click();
+        profileSettingsPopUp.name.clearTextField();
+        profileSettingsPopUp.name.setText(newName+Keys.ENTER);
+        profileSettingsPopUp.closeButton.click();
+        workspacePage.profileButton.click();
+        Assertions.assertTrue(profilePopUp.userName(newName).isControlDisplayed(), "ERROR no se pudo crear un nuevo task");
     }
 }

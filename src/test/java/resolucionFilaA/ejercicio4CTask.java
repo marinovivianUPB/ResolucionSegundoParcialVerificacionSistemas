@@ -1,4 +1,4 @@
-package selenium.testTodoist;
+package resolucionFilaA;
 
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.Assertions;
@@ -6,19 +6,22 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import selenium.pagesTodoist.LoginPage;
 import selenium.pagesTodoist.MainPage;
-import selenium.pagesTodoist.WorkspacePage;
+import selenium.pagesTodoist.*;
 import selenium.session.Session;
 
-public class LoginTodoistTest {
+import java.util.Random;
 
+public class ejercicio4CTask {
     MainPage mainPage = new MainPage();
     LoginPage loginPage = new LoginPage();
 
     WorkspacePage workspacePage = new WorkspacePage();
 
+    AddTaskSection addTaskSection = new AddTaskSection();
     String email = "prueba65785@prueba65785.com";
     String password = "abc456gh913";
 
+    static Random rand = new Random();
     @AfterEach
     public void close(){
         Session.getInstance().closeSession();
@@ -36,6 +39,11 @@ public class LoginTodoistTest {
         loginPage.passwordTextBox.setText(password);
         loginPage.loginButton.click();
         Thread.sleep(10000);
-        Assertions.assertTrue(workspacePage.profileButton.isControlDisplayed(), "ERROR no se pudo iniciar sesion");
+        workspacePage.addTask.click();
+        String taskName = "VivianMarino"+rand.nextInt(500)+rand.nextInt(500);
+        addTaskSection.taskName.setText(taskName);
+        addTaskSection.description.setText("Un nuevo task");
+        addTaskSection.addTaskButton.click();
+        Assertions.assertTrue(addTaskSection.newTaskCreated(taskName).isControlDisplayed(), "ERROR no se pudo crear un nuevo task");
     }
 }

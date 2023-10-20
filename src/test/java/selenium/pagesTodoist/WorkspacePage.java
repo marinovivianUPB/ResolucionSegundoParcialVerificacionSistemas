@@ -8,4 +8,6 @@ public class WorkspacePage {
 
     public Button projects = new Button(By.xpath("//a[@href='/app/projects']"));
 
+    public Button addTask = new Button(By.xpath("//button[@class='plus_add_button']"));
+
 }
